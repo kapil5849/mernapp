@@ -54,6 +54,25 @@ app.get("/", (req, res) => {
 //         }
 //     })
 // })
+// app.post("/signup", async (req, res) => {
+//   console.log(req.body);
+//   const { email } = req.body;
+//   try {
+//     const result = await userModel.findOne({ email: email });
+//     console.log(result);
+//     if (result) {
+//       res.send({ message: "Email id is already registered" });
+//     } else {
+//       const data = new userModel(req.body);
+//       const savedData = await data.save();
+//       res.send({ message: "Successfully signed up" });
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send({ message: "Internal server error" });
+//   }
+// });
+
 app.post("/signup", async (req, res) => {
   console.log(req.body);
   const { email } = req.body;
@@ -64,7 +83,7 @@ app.post("/signup", async (req, res) => {
       res.send({ message: "Email id is already registered" });
     } else {
       const data = new userModel(req.body);
-      const savedData = await data.save();
+      const savedData = await data.savedData();
       res.send({ message: "Successfully signed up" });
     }
   } catch (err) {
@@ -72,6 +91,7 @@ app.post("/signup", async (req, res) => {
     res.status(500).send({ message: "Internal server error" });
   }
 });
+
 
 
 app.listen(PORT, () => console.log("server is running at port : " + PORT))
